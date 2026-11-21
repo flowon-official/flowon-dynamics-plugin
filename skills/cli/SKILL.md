@@ -380,6 +380,7 @@ or put the command on one line. Reference variables as `$env:NAME`. Keep multi-v
 | Solution import: "Patch 'X' comes before 'Y'" (the solution it patches, or an older patch) | The files were given in the wrong order | Give the solution first and patches oldest first, or use the wildcard on the numbered files |
 | Export: "Cannot modify solution because it has the following patches" | Dataverse doesn't export a solution while it has patches | Export the patches (`-sp Latest` or `All`), or with the user's confirmation `merge-patches` in development, then export again |
 | `merge-patches`: "its major or minor part must be higher" | The given version doesn't raise the major or minor part | Leave `-v` out (next minor version) or give one such as `1.3.0.0` |
+| `import`: "--solution-timeout must be a number of minutes greater than 0" without giving it | A bug in version 1.2.0 | Add `--solution-timeout 60`, or update the tool to 1.3.0 or later |
 | A package's records refer to the wrong records in the target | Record IDs differ per environment | Add entries to the entity map, or set `importBehavior` in the data spec |
 | `apply-mappings` refuses a map | It's an entity map | Pass it to `import -p ... -m ...` instead |
 | Localized map entry "has no languages" | The map came from an older version that wrote the resource name as `lcid` | Export the package again and regenerate the maps |
