@@ -29,27 +29,37 @@ dotnet --version                   # needs the .NET 10 SDK or later
 - **This skill comes with the Logic Fabric CLI plugin for Claude Code** (`flowon-dynamics@flowon`).
   Keep it current with `claude plugin update flowon-dynamics@flowon`.
 - If a command's options are unclear, run `flowon-dynamics <command> --help`. The installed
-  version's help output wins over this file.
+  version's help output wins over this file. **Version 1.2.0 and earlier show the value of
+  `FLOWON_CONNECTION_STRING`, secret included, in help**, and print that help after any wrong
+  command line too: with those versions, see the first rule in section 2.
 
 ## 2. Connection strings and secrets
 
 Every command that talks to Dataverse needs a connection string: `-c, --connection-string`
 (`--connectionstring` still works), or the `FLOWON_CONNECTION_STRING` environment variable when
-`-c` is left out. Prefer the variable: it keeps the secret out of the command line and the process
-list.
+`-c` is left out. From version 1.3.0, prefer the variable: it keeps the secret out of the command
+line and the process list.
 
 ```
 AuthType=ClientSecret;Url=https://<org>.crm.dynamics.com;ClientId=<id>;ClientSecret=<secret>
 ```
 
 Rules:
+- **With version 1.2.0 or earlier, never set `FLOWON_CONNECTION_STRING`.** Pass the connection
+  string with `-c "$env:VAR"` (PowerShell) or `-c "$VAR"` (bash), and run `--help` only where
+  `FLOWON_CONNECTION_STRING` isn't set. Those versions print the variable's value in help, which
+  they also print after a wrong command line, so one mistyped option puts the secret in the output.
+  Update the tool once a newer version is out (section 1).
 - **Never print, echo, log or commit a connection string or client secret.** Keep it in an
   environment variable (for example `DEV_CONNECTION_STRING`, `UAT_CONNECTION_STRING`,
-  `PROD_CONNECTION_STRING`) and pass it as `"$VAR"` (bash) or `"$env:VAR"` (PowerShell), or set
-  `FLOWON_CONNECTION_STRING` from it for the command (`FLOWON_CONNECTION_STRING="$UAT_CONNECTION_STRING" flowon-dynamics ...`).
-- If no variable is set, ask the user which one to use, or ask them to set it with a
-  `! $env:DEV_CONNECTION_STRING = "..."` command in the prompt. Don't ask them to paste the
-  secret into chat.
+  `PROD_CONNECTION_STRING`) and pass it as `"$VAR"` (bash) or `"$env:VAR"` (PowerShell), or, from
+  version 1.3.0, set `FLOWON_CONNECTION_STRING` from it for the command
+  (`FLOWON_CONNECTION_STRING="$UAT_CONNECTION_STRING" flowon-dynamics ...`).
+- If no variable is set, ask the user which one to use, or ask them to set it outside Claude Code
+  (Windows: Environment Variables in System Properties, or
+  `[Environment]::SetEnvironmentVariable('DEV_CONNECTION_STRING', '...', 'User')` in their own
+  terminal) and restart Claude Code so it sees it. Never through a `!` command in the prompt, and
+  never by pasting it into chat: both put the secret in the conversation.
 - Before running a command, **say which environment it targets** by naming its host from the
   URL (for example `contoso-uat.crm4.dynamics.com`), without showing the secret.
 
