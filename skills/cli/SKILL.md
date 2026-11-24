@@ -26,8 +26,9 @@ dotnet --version                   # needs the .NET 10 SDK or later
 - Update: `dotnet tool update --global Flowon.Xrm.Tools.CommandLine`
 - Repo-local (CI): `dotnet new tool-manifest`, then `dotnet tool install Flowon.Xrm.Tools.CommandLine`,
   then run `dotnet tool run flowon-dynamics ...`
-- **This skill comes with the Logic Fabric CLI plugin for Claude Code** (`flowon-dynamics@flowon`).
-  Keep it current with `claude plugin update flowon-dynamics@flowon`.
+- **This skill comes with the Logic Fabric CLI plugin** (`flowon-dynamics@flowon`) for Claude Code, Codex and
+  GitHub Copilot. Keep it current with the client's plugin update (`claude plugin update flowon-dynamics@flowon`,
+  `copilot plugin update flowon-dynamics@flowon`, or `/plugins` in Codex).
 - If a command's options are unclear, run `flowon-dynamics <command> --help`. The installed
   version's help output wins over this file. **Version 1.2.0 and earlier show the value of
   `FLOWON_CONNECTION_STRING`, secret included, in help**, and print that help after any wrong
@@ -55,10 +56,10 @@ Rules:
   `PROD_CONNECTION_STRING`) and pass it as `"$VAR"` (bash) or `"$env:VAR"` (PowerShell), or, from
   version 1.3.0, set `FLOWON_CONNECTION_STRING` from it for the command
   (`FLOWON_CONNECTION_STRING="$UAT_CONNECTION_STRING" flowon-dynamics ...`).
-- If no variable is set, ask the user which one to use, or ask them to set it outside Claude Code
+- If no variable is set, ask the user which one to use, or ask them to set it outside the AI tool
   (Windows: Environment Variables in System Properties, or
   `[Environment]::SetEnvironmentVariable('DEV_CONNECTION_STRING', '...', 'User')` in their own
-  terminal) and restart Claude Code so it sees it. Never through a `!` command in the prompt, and
+  terminal) and restart the AI tool so it sees it. Never through a command typed into the conversation (such as
   never by pasting it into chat: both put the secret in the conversation.
 - Before running a command, **say which environment it targets** by naming its host from the
   URL (for example `contoso-uat.crm4.dynamics.com`), without showing the secret.
@@ -243,7 +244,7 @@ flowon-dynamics generate-openapi -c "$CS" -pn "<Project>" -a "<ApiName>" -o "./d
 ### Tests (through Logic Foundry)
 ```bash
 # Runs the test case files a change's tests/ folder holds, through Foundry's test tool, so a pipeline
-# runs the same tests Claude ran during the build. Exits non-zero when a case fails.
+# runs the same tests the build ran. Exits non-zero when a case fails.
 flowon-dynamics test --foundry-url "https://<foundry host>/mcp" --project "<Project>"   --tests "./logic-fabric/changes/<change>/tests" [--workspace ./logic-fabric/workspace.yaml]   [--token-variable FOUNDRY_TOKEN] [--junit ./test-results.xml]
 ```
 - It talks to Foundry, not to Dataverse, so it takes no connection string. The bearer token for

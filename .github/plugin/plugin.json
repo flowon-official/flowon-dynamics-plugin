@@ -1,0 +1,22 @@
+{
+  "name": "flowon-dynamics",
+  "version": "1.1.0",
+  "description": "Use the Logic Fabric CLI (flowon-dynamics) and the Flowon PowerShell module, Codex and GitHub Copilot: export and import Logic Fabric projects, solutions, security and reference data, data mappings, solution patches, Logic APIs, tests and deployment pipelines, for Logic Fabric for Dataverse and Logic Fabric for Dynamics 365 On-Premises.",
+  "author": {
+    "name": "Flowon"
+  },
+  "homepage": "https://docs.flowon.com/alm/cli/installation/",
+  "repository": "https://github.com/flowon-official/claude-plugins",
+  "license": "LicenseRef-Flowon",
+  "keywords": [
+    "dataverse",
+    "dynamics-365",
+    "logic-fabric",
+    "flowon",
+    "cli",
+    "alm"
+  ],
+  "skills": [
+    "./skills/"
+  ]
+}
