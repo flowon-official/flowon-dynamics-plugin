@@ -27,21 +27,21 @@ You need:
 Claude Code:
 
 ```bash
-claude plugin marketplace add flowon-official/claude-plugins
+claude plugin marketplace add flowon-official/ai-plugins
 claude plugin install flowon-dynamics@flowon
 ```
 
 GitHub Copilot:
 
 ```bash
-copilot plugin marketplace add flowon-official/claude-plugins
+copilot plugin marketplace add flowon-official/ai-plugins
 copilot plugin install flowon-dynamics@flowon
 ```
 
 Codex:
 
 ```bash
-codex plugin marketplace add flowon-official/claude-plugins
+codex plugin marketplace add flowon-official/ai-plugins
 codex plugin add flowon-dynamics@flowon
 ```
 

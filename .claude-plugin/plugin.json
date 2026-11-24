@@ -7,7 +7,7 @@
     "name": "Flowon"
   },
   "homepage": "https://docs.flowon.com/alm/cli/installation/",
-  "repository": "https://github.com/flowon-official/claude-plugins",
+  "repository": "https://github.com/flowon-official/flowon-dynamics-plugin",
   "license": "LicenseRef-Flowon",
   "privacyPolicyUrl": "https://www.flowon.com/privacy-policy",
   "network": {
